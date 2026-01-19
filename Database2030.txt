@@ -1,0 +1,1089 @@
+MySQL
+----------------------------------------------
+DBMS -- [Database Management System]
+--------------------------------------------------------------------------------------
+DataBase:- A Database is a collection of data stored in a format that can easily be accessed.
+-------------------------------------------------------------------------------------
+Collection of Data:
+---------------------------------------
+Name		| Age	| Gender
+----------------------------------------
+Ram Kumar	| 21	|Male
+------------------------------------------------
+Salman Khan	|22	|Male
+----------------------------------------------
+Meera Khan	|21	|Female
+---------------------------------------------------
+Anil Kapoor	|22	|Male
+----------------------------------------------------------
+------------------------------------------------------------------------
+
+client/User ------> DBMS --------> Database
+-------------------------------------------------------------------------------------
+Ex:- 
+	1). Oracle
+	2). MYSQL
+	3). MS-SQL Server
+	4). PostgreSQL
+	5). MongoDB
+-------------------------------------------------------------------------------------
+>> There are two types of Databse.
+---------------------------------------------------------------------------
+Relational DB	| NoSQL - [No Structure Query Language]
+-------------------------------------------------------------------
+1. Table	| No-Table [key-value]
+--------------------------------------------------------------
+2. SQL-RDBMS	| It is Document Based Database.
+------------------------------------------------------------------
+Ex-
+RDBMS- Oracle,
+MySQL,
+MS-SQL Server,
+PostgreSQL etc.
+--------------------------------
+Ex - NoSQL
+-----------------
+MongoDB,
+Redis,
+Cassandra etc.
+-------------------------------------------------------------------------------------
+Advantages:
+-------------------------------------------------
+1. Cross Platform
+2. Used with multiple languages [PHP, NodeJS, Python, C#]
+3. MySQL software is open Source
+4. The MySQL database server is fast, reliable, Scalable and easy to use.
+5. MySQL Server works in client/server or embedded system.
+---------------------------------------------------------------------------------------
+Popular Website using MYSQL
+------------------------------------------------------
+1). Facebook 2). Twitter 3). Google 4). Wikipedia 5). YouTube 6). Flickr 7). Pinterest Etc.
+-------------------------------------------------------------------------------------
+Content  Management System using MYSQL
+---------------------------------------------------
+1). Wordpress 2). Joomla	3). Drupal	4). Magento 	5). PhPBB 	6).Typo3	7). MoDEx
+-----------------------------------------------------------------------------------------
+
+
+Content to Learn in this course
+------------------------------------------------------------------------------
+1). Create Databases and Table in Database.
+2). Add Data in Database
+3). Update Data in Database
+4). Delete Data from Database
+-----------------------------------------------------------------------------
+>> How to create SQL Database?
+------------------------------------------------------
+>> create database databaseName;
+----------------------------------------------------------------------------
+mysql> create database DemoDatabase;
+Query OK, 1 row affected (0.02 sec)
+----------------------------------------------------------------------------------
+mysql> create database DemoDatabase;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| demodatabase       |
+| elearningapp       |
+| information_schema |
+| mediplusapp        |
+| mysql              |
+| performance_schema |
+| sys                |
+| uday               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use demodatabase;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql>
+-----------------------------------------------------------------------------
+>>> How to Create table in MySQL?
+---------------------------------------------------------
+syntax:
+-----------------------
+CREATE TABLE tableName(
+	column1	dataType1,
+	column2 dataType2,
+	column3	dataType3,
+	column4 dataType4
+	);
+-------------------------------------------------------------------------
+3). Three Typed of Category in Datatype
+	1.String
+	2.Number
+	3.DateTime
+---------------------------------------------------------------
+mysql> CREATE TABLE student(
+    -> id INT,
+    -> name Char(50),
+    -> birthDate DATE,
+    -> phone VARCHAR(12),
+    -> gender CHAR(12)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+------------------------------------------------------------------------------------
+mysql> show tables;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| student                |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> describe student;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| name      | char(50)    | YES  |     | NULL    |       |
+| birthDate | date        | YES  |     | NULL    |       |
+| phone     | varchar(12) | YES  |     | NULL    |       |
+| gender    | char(12)    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> INSERT INTO student(id,name,birthDate,phone,gender)
+    -> values
+    -> (1,"Ram Kumar","2000-12-12","0123456789","Male");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+-----------+------------+------------+--------+
+| id   | name      | birthDate  | phone      | gender |
++------+-----------+------------+------------+--------+
+|    1 | Ram Kumar | 2000-12-12 | 0123456789 | Male   |
++------+-----------+------------+------------+--------+
+1 row in set (0.00 sec)
+
+
+mysql> INSERT INTO student(id,name,birthDate,phone,gender)
+    -> values
+    -> (2,"Sweta Pathak","2002-08-05","0147852369","Female"),
+    -> (3,"Suraj Upadhayay","2005-08-07","0147852693","Male");
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+
+mysql> select * from student;
++------+-----------------+------------+------------+--------+
+| id   | name            | birthDate  | phone      | gender |
++------+-----------------+------------+------------+--------+
+|    1 | Ram Kumar       | 2000-12-12 | 0123456789 | Male   |
+|    2 | Sweta Pathak    | 2002-08-05 | 0147852369 | Female |
+|    3 | Suraj Upadhayay | 2005-08-07 | 0147852693 | Male   |
++------+-----------------+------------+------------+--------+
+3 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------
+
+1.String
+-----------------------------------------------------------------
+1). CHAR(SIZE) --> 0-255 [CHARACTERS]
+2). VARCHAR(SIZE) --> 0-65,535 [VARIABLE]
+3). BINARY[SIZE] ---> It stores only binary value [0-255]
+4). VARBINARY(SIZE) --> 0-65,535
+5). TINYTEXT(SIZE) --> 255[FIXED]
+6). TEXT[SIZE] --> 65535 BYTES
+7). MEDIUMTEXT --> 16,777,215 CHAR
+8). LONGTEXT --> 4,294, 967,925 CHARACTERS
+9). TINYBLOB --> 255 BYTES
+10). BLOB(SIZE) --> 65535 BYTES
+11). MEDIUMBLOB -- > 16,777,215 BYTES
+12). LONGBLOB --> 4,294, 967,925 BYTES
+13). ENUM(VAL1,VAL2,VAL3.....)
+14). SET(VAL1,VAL2,VAL3)
+
+
+-----------------------------------------------------------------------
+| Type       | Max Size     | Fixed / Variable |
+| ---------- | ------------ | ---------------- |
+| CHAR       | 255 chars    | Fixed            |
+| VARCHAR    | 65,535 chars | Variable         |
+| BINARY     | 255 bytes    | Fixed            |
+| VARBINARY  | 65,535 bytes | Variable         |
+| TINYTEXT   | 255 bytes    | Variable         |
+| TEXT       | 65,535 bytes | Variable         |
+| MEDIUMTEXT | 16 MB        | Variable         |
+| LONGTEXT   | 4 GB         | Variable         |
+| TINYBLOB   | 255 bytes    | Variable         |
+| BLOB       | 65,535 bytes | Variable         |
+| MEDIUMBLOB | 16 MB        | Variable         |
+| LONGBLOB   | 4 GB         | Variable         |
+
+
+------------------------------------------------------------------------------------
+2.NUMERIC DATA TYPES IN MYSQL
+-----------------------------------------------------------------------------
+1). BIT(SIZE) ---- 1-64 
+2). TINYINT(SIZE) --> -128 - 127
+3). INT(SIZE)--> -2147483648 to 2147483647
+4). INTEGER(SIZE) --> SAME AS INT
+5). SMALLINT(SIZE) --> -32768 to 32767
+6). MEDIUMINT(SIZE) --> -8388608 to 8388607
+7). BIGINT(SIZE) --> [-9223372036854775808 to 9223372036854775807]
+8). BOOL --> 0/1 (TRUE/FALSE)
+9).BOOLEAN -->  0/1 (TRUE/FALSE)
+
+10). DOUBLE(SIZE,d)--> 255.568 [NUM,3]
+11). DECIMAL(SIzE,d)--> (SIZE=60,d=30)
+12). FLOAT (P)  --> 255.568 
+13). DEC(SIZE,d) --> (SIZE=60,d=30)
+---------------------------------------------------------------------------------------------
+
+| Data Type | Storage  | Range (Signed)          |
+| --------- | -------- | ----------------------- |
+| TINYINT   | 1 byte   | -128 to 127             |
+| SMALLINT  | 2 bytes  | -32,768 to 32,767       |
+| MEDIUMINT | 3 bytes  | -8,388,608 to 8,388,607 |
+| INT       | 4 bytes  | -2.1B to 2.1B           |
+| BIGINT    | 8 bytes  | ±9.22 quintillion       |
+| FLOAT     | 4 bytes  | Approx                  |
+| DOUBLE    | 8 bytes  | Approx                  |
+| DECIMAL   | Variable | Exact                   |
+
+---------------------------------------------------------------------------------------------------------
+
+3). DATE & TIME IN MYSQL
+-----------------------------------------------------------------
+1). DATE --> "1000-01-01" TO "9999-12-31"
+2). DATETIME(fps) -- > YYYY-MM-DD HH:MM:SS
+3). TIMESTAMP(fps) - OLD DATE SAME DATETIME
+4). TIME(fps) -- > HH:MM:SS
+5). YEAR --> FOUR DIGIT FORMAT: 1901
+--------------------------------------------------
+| Data Type | Range     | Time Zone |
+| --------- | --------- | --------- |
+| DATE      | 1000–9999 | ❌         |
+| DATETIME  | 1000–9999 | ❌         |
+| TIMESTAMP | 1970–2038 | ✅         |
+| TIME      | ±838 hrs  | ❌         |
+| YEAR      | 1901–2155 | ❌         |
+------------------------------------------------------------------------------
+MYSQL CONSTRAINTS --> [RESTRICTIONS]
+----------------------------------------------------
+1). NOT NULL
+2). UNIQUE
+3). CHECK
+4). DEFAULT
+5). FOREIGN KEY
+6). PRIMARY
+---------------------------------------------------------------------------------
+
+SYNTAX:
+--------------
+CREATE TABLE SYNTAX WITH CONSTRANTS
+----------------------------------------------
+CRATE TABLE Table_Name(
+	ID INT NOT NULL UNQUIE,
+	NAME CHAR(50) NOT NULL,
+	AGE INT NOT NULL CHECK(AGE>=18),
+	GENDER VARCHAR(10) NOTNULL,
+	PHONE INT UNIQUE,
+	CITY VARCHAR(10) NOT NULL DEFAULT "AGRA"
+);
+
+------------------------------------------------------------------------
+MySQL select with where caluse:-
+-------------------------
+syntax:-
+-------------
+SELECT COLUMN1, COLUMN2,COLUMN3.......
+from tableName;
+------------------------------------------------------
+other:
+-----------------
+select * from table name;
+-------------------------------------------------------------------------
+
+----------------------------------------------------------------------
+how to rename column
+----------------------------
+>> select id,name,phone from tableName;
+
+view column as New name
+---------------------
+select id as ID, name as NAME, phone as PHONE from tableName;
+
+---------------------------------------------------------------------
+9. MYSQL IN Operators
+-----------------------------------------------------------
+
+SELECT DATA IN OPERATORS
+---------------------------------------------------------------------
+Ex:-
+--------
+Where age == 18 OR age == 21
+same 
+where age IN(18,21);
+-----------------------------------------------------------------------
+Syntax:-
+----------------
+mysql> select id, name as STUDENT_NAME, age as STUDENT_AGE, gender as STUDENT_GENDER, phone as STUDENT_PHONE, city as STUDENT_CITY from student;
++----+--------------+-------------+----------------+---------------+--------------+
+| id | STUDENT_NAME | STUDENT_AGE | STUDENT_GENDER | STUDENT_PHONE | STUDENT_CITY |
++----+--------------+-------------+----------------+---------------+--------------+
+|  1 | RAM KUMAR    |          18 | MALE           |     123456789 | AGRA         |
+|  2 | SHYAM SINGH  |          22 | MALE           |      12345672 | RAY NAGAR    |
+|  3 | SWATI MISHRA |          35 | FEMALE         |     123456720 | AGRA         |
++----+--------------+-------------+----------------+---------------+--------------+
+3 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------
+
+>> How to show conditional type database
+-----------------------------------------------------
+Select data with WHERE CALUSE
+----------------------------------------
+>> Syntax:-
+--------------------------
+SELECT COLUMN1,COLUMN2,COLUMN3............
+FROM tableName
+WHERE CONDITION;
+--------------------------------------------------------------------------------------------
+
+WHERE COMPARISON OPERATORS:-
+------------------------------------------------------
+OPERATOR	|	DESCRIPTIONS
+-------------------------------------------------------------------
+=		| EQUALS
+>		| GREATER THAN
+<		| LESS THAN
+>=		| GREATER THAN EQUALS TO
+<=		| LESS THAN EQUALS TO
+<>  OR !=	| NOT EQUALS TO
+BETWEEN 	| BETWEEN A CERTAIN RANGE.
+LIKE		| SEARCH FOR A PATTERN
+IN		| TO SPECIFY MULTIPLE POSSIBLE VALUES FOR A COLUMN
+--------------------------------------------------------------------------------------
+
+SELECT * FROM STUDENT WHERE GENEDER = "FEMALE";
+-----------------------------------------------------------
+
+
+
+
+BASIC GATES:
+-------------------
+AND, OR, NOT OPERATORS
+-------------------------------------------
+AND -  BOTH CONDITIONS ARE TRUE
+OR - IF ANY ONE CONDITION IS TRUE
+NOT - COMPLIMENT OF VALUE
+--------------------------------------------------------------------
+
+SYNTAX:
+-------------
+SELECT COL1,COL2,COL3..........
+FROM TABLENAME
+WHERE CODNTION1 AND CONDITION2 AND CONDITION3;
+----------------------------------------------------
+
+SELECT COL1,COL2,COL3..........
+FROM TABLENAME
+WHERE CODNTION1 OR CONDITION2 OR CONDITION3;
+----------------------------------------------------------------------------------------------
+
+>> MYSQL IN Operator:
+---------------------------------------------------------------------------------------------------
+>> SELECT DATA WITH IN OPERATORS
+---------------------------------------------
+>> Where age = 18 OR age = 21
+	>> same AS
+>> where age IN(18,21)
+----------------------------------------------------------------------------------------------------
+syntax:
+--------------
+	>>SELECT COLUMN1, COLUMN2, COLUMN3
+	>> FROM TABLE_NAME
+	>> WHERE COLUMN_NAME IN(VALUE1,VALUE2,VALUE......)
+
+	>>SELECT COLUMN1, COLUMN2, COLUMN3
+	>> FROM TABLE_NAME
+	>> WHERE COLUMN_NAME NOT IN(VALUE1,VALUE2,VALUE......)
+------------------------------------------------------------------------------------------------
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE NOT IN (18,35);
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE GENDER NOT IN ("FEMALE");
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+>> MYSQL BETWEEN & NOT BETWEEN OPERATORS
+------------------------------------------------------------
+SELECT DATA WITH BETWEEN OPERATORS
+------------------------------
+NOTE:
+	TO GIVE A RANGE IN MYSQL WE USE BETWEEN OPERATOR.
+----------------------------------------------------------------------------------------
+	>> 1. WHERE AGE BETWEEN 18 AND 20
+	>> 2. DOB - JANUARY 1998 TO JUNE 1998;
+-----------------------------------------------------------------------------------------
+SYNTAX:
+	SELECT COLUMN1, COLUMN2,COLUMN3...............
+	FROM TABLE_NAME
+	WHERE COLUMN_NAME NOT BETWEEN VALUE1 AND VALUE2;
+---------------------------------------------------------------------------------------------------
+HOW TO USE BETWEEN OPERATOR
+------------------------------------------------------------
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE BETWEEN 18 AND 30;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
++----+-------------+-----+--------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE BETWEEN 18 AND 50;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------
+
+>> LIKE OPERATOR & WILD CARD
+---------------------------------------------------------------------------------------------------
+SELECT DATA WITH LIKE OPERATOR
+----------------------------------------------
+WHERE NAME LIKE "%S"
+WHERE NAME LIKE "S%"
+---------------------------------------------------------
+% MEANS CHARACTER SHOULD END FROM S.
+
+S MEANS CHARACTER SHOULD START FROM S.
+-------------------------------------------------------------------------------------
+WILD CARD CHARACTERS 
+-----------------------------------------------------------
+% -> MODULUS [PERCENTAGE] -  REPRESENT ZERO, ONE, OR MULTIPLE CHARACTERSS.
+
+_ -> UNDERSCORE - REPRESENT A SINGLE CHARACTERS
+--------------------------------------------------------------------------------------
+PATTERN 	| DESCRPTIONS
+--------------------------------------------------------------------------------------------
+LIKE "%a"	|"End form a"
+--------------------------------------
+LIKE "a%"	| "starts from a"
+------------------------------------------------
+LIKE "%AB%"	| "HAVE 'AB' ANY WHERE IN CONTENT OR WORDS "
+------------------------------------------------------------------
+LIKE "A%B"	| "START WITH 'A' AND END WITH 'B' "
+-----------------------------------------------------------------------------------
+LIKE "_A%"	| SECOND POSITION OF CHARACTER 'A'
+----------------------------------------------------------------------------
+LIKE "_ _A%" 	| THIRD POSITION OF CHARACTER 'A'
+-------------------------------------------------------------------------
+LIKE "_OY"	| 'O' IN THE SECOND POSITION AND 'Y' IN THE THIRD POSITION.
+-----------------------------------------------------------------------------------
+
+SYNTAX:
+	SELECT COLUMN1,COLUMN2,COLUMN3...........
+	FROM TABLE_NAME
+	WHERE COLUMN_NAME LIKE PATTERN
+--------------------------------------------------------------------------------------------
+LIKE WITH NOT OPERATOR
+------------------------------------------------------------------------------------------
+SELECT COLUMN1, COLUMN2, COLUMN3.......
+FROM TABLE_NAME
+WHERE COLUMN_NAME NOT LIKE PATTERN;
+---------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+>> MYSQL REGULAR EXPRESSION
+-------------------------------------------------------------------------------------------
+SELECT DATA WITH REGULAR EXPRESSION
+---------------------------------------------------------------------------
+>> WE FOUND MULTIPLE RESULT USING REGULAR EXPRESSION [RegExp]
+----------------------------------------------------------------------------------
+EX:-
+	WHERE NAME REGEXP "KHAN$ | POOR"
+--------------------------------------------------------------------------------------------
+$ -> DOLLAR MEANS - IT DENOTED LAST CHARACTER.
+| -> NEXT CHARACTER
+------------------------------------------------------------------------------------------
+SIGN	| PATTERN	| DESCRIPTION
+-----------------------------------------------------------------------------------------
+^[caret]| '^ra'		| Beginning of string.
+------------------------------------------------------------
+$[dollar]| "an$"	| End of string value.
+-----------------------------------------------------------------------------------
+[....]|	"[rms]"		| Any character listed between the square bracket.
+----------------------------------------------------------------------------------
+^[...]|	"^[rms]"	| Begins with any character listed between the square bracket.
+------------------------------------------------------------------------------------
+[a-z]|	"[a-z]e"	| starts from a and e is the second position char i.e- ae,be,ce,de,ee,fe.....etc.
+------------------------------------------------------------------------------------
+p1|p2|p3|"tom|harry|jerry"| match any of the patters like p1,p2 or p3
+----------------------------------------------------------------------------------------
+syntax:
+-------------------------------
+select column1, column2, column3
+from table_name
+where column_name REGEXP PATTERN;
+-----------------------------------------------------------------
+PRACTICE
+--------------------------------
+Microsoft Windows [Version 10.0.26200.7623]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\User>cd..
+
+C:\Users>cd..
+
+C:\>cd "Program Files"
+
+C:\Program Files>cd MySQL
+
+C:\Program Files\MySQL>cd "MySQL Server 8.0"
+
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.43 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| demodatabase       |
+| elearningapp       |
+| information_schema |
+| mediplusapp        |
+| mysql              |
+| performance_schema |
+| sys                |
+| uday               |
++--------------------+
+8 rows in set (0.06 sec)
+
+mysql> use demodatabase;
+Database changed
+mysql> show tables;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| student                |
++------------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from student;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.01 sec)
+
+mysql> select * from student where age>20 and age<=90;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where gender = "Male";
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where gender = "female";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where not city = "agra";
++----+-------------+-----+--------+----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY      |
++----+-------------+-----+--------+----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   | 12345672 | RAY NAGAR |
++----+-------------+-----+--------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where not gender = "male";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student
+    -> where age = 10 and age = 100;
+Empty set (0.00 sec)
+
+mysql> select * from student
+    -> where age = 35 and age>40;
+Empty set (0.00 sec)
+
+mysql> select * from student
+    -> where age = 35 and age = 100;
+Empty set (0.00 sec)
+
+mysql> select * from student;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student
+    -> where age = 18 or age = 100;
++----+-----------+-----+--------+-----------+------+
+| ID | NAME      | AGE | GENDER | PHONE     | CITY |
++----+-----------+-----+--------+-----------+------+
+|  1 | RAM KUMAR |  18 | MALE   | 123456789 | AGRA |
++----+-----------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from student
+    -> where age = 35 or age = 100;
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
++----+--------------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from student
+    -> where age IN (18,100);
++----+-----------+-----+--------+-----------+------+
+| ID | NAME      | AGE | GENDER | PHONE     | CITY |
++----+-----------+-----+--------+-----------+------+
+|  1 | RAM KUMAR |  18 | MALE   | 123456789 | AGRA |
++----+-----------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from student
+    -> where age IN (35,100);
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
++----+--------------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NOT IN (GENDER="FEMALE");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN (GENDER="FEMALE")' at line 2
+mysql> SELECT * FROM STUDENT
+    -> WHERE NOTIN (GENDER="FEMALE");
+ERROR 1305 (42000): FUNCTION demodatabase.NOTIN does not exist
+mysql> SELECT * FROM STUDENT
+    -> WHERE GENDER NOTIN ("FEMALE");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOTIN ("FEMALE")' at line 2
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE NOTIN (18,35);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOTIN (18,35)' at line 2
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE NOT IN (18,35);
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE GENDER NOT IN ("FEMALE");
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE BETWEEN 18 AND 30;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
++----+-------------+-----+--------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE BETWEEN 18 AND 50;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT WHERE ID BETWEEN 3 AND 5;
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "S%";
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "%H";
++----+-------------+-----+--------+----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY      |
++----+-------------+-----+--------+----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   | 12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE | 12365478 | AGRA      |
++----+-------------+-----+--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "R%R";
++----+-----------+-----+--------+-----------+------+
+| ID | NAME      | AGE | GENDER | PHONE     | CITY |
++----+-----------+-----+--------+-----------+------+
+|  1 | RAM KUMAR |  18 | MALE   | 123456789 | AGRA |
++----+-----------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "%SI%";
++----+-------------+-----+--------+----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY      |
++----+-------------+-----+--------+----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   | 12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE | 12365478 | AGRA      |
++----+-------------+-----+--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "_H%";
++----+-------------+-----+--------+----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY      |
++----+-------------+-----+--------+----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   | 12345672 | RAY NAGAR |
++----+-------------+-----+--------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "_A%";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR  |  18 | MALE   | 123456789 | AGRA |
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "__E%";
++----+-------------+-----+--------+----------+------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY |
++----+-------------+-----+--------+----------+------+
+|  4 | SWETA SINGH |  88 | FEMALE | 12365478 | AGRA |
++----+-------------+-----+--------+----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "__AV";
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "_AV";
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME LIKE "_AV%";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "RA";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "^RA";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR  |  18 | MALE   | 123456789 | AGRA |
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "SW";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "^SW";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "A$";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
++----+--------------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "H$";
++----+-------------+-----+--------+----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE    | CITY      |
++----+-------------+-----+--------+----------+-----------+
+|  2 | SHYAM SINGH |  22 | MALE   | 12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE | 12365478 | AGRA      |
++----+-------------+-----+--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "RAM|RAVI|UDAY";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR  |  18 | MALE   | 123456789 | AGRA |
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "^RAM|RAVI|UDAY";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR  |  18 | MALE   | 123456789 | AGRA |
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "^RAM|AV$|UDAY";
++----+------------+-----+--------+-----------+------+
+| ID | NAME       | AGE | GENDER | PHONE     | CITY |
++----+------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR  |  18 | MALE   | 123456789 | AGRA |
+|  5 | RAVI YADAV |  98 | MALE   | 912365478 | AGRA |
++----+------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "[TA]";
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> WHERE NAME REGEXP "[RA]M";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE NAME REGEXP "[RA]M"' at line 1
+mysql> WHERE NAME REGEXP "[R]A";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE NAME REGEXP "[R]A"' at line 1
+mysql> SELECT * FROM STUDENT
+    -> WHERE NAME REGEXP "[R]A";
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA |
++----+--------------+-----+--------+-----------+------+
+3 rows in set (0.00 sec)
+
+mysql>
+--------------------------------------------------------------------------------------------
+
+
+
+
+
