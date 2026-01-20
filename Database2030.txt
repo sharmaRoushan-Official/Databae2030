@@ -1082,6 +1082,485 @@ mysql> SELECT * FROM STUDENT
 
 mysql>
 --------------------------------------------------------------------------------------------
+MySQL ORDER BY & DISTINCT
+----------------------------------------------------------------------------------------
+SELECT DATA WITH ORDER BY:-
+----------------------------------------
+NOTE:-
+	DATA ARRANGED IN ASCENDING OR DESCENDING ORDER.
+-----------------------------------------------------------------------------------------------
+SYNTAX:-
+	SELECT COL1,COL2,COL3........
+	FROM TABLE NAME
+	ORDER BY COL1,COL2,COL3....ASC
+-----------------------------------------------------------------------------------------------
+NOTE:-
+	ASC IS DEFAULT VALUE-IF YOU DON'T WRITE IT WILL ARRANGED YOUR DATA IN ASCENDING ORDER.
+------------------------------------------------------------------------------------------------
+
+mysql> show tables;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| student                |
++------------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from student;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY NAME;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY AGE;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY PHONE;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY CITY;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY CITY ASC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY NAME ASC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY NAME DESC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY AGE DESC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY GENDER DESC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY PHONE DESC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT ORDER BY CITY DESC;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+
+-------------------------------------------------------------------------------------------------
+
+>> SELECT DATA WITH DISTINCT
+---------------------------------------------------------------------------
+SELECT CITY FROM STUDENT;
+-----------------------------------------------------------------
+IT SHOW ONLY UNIQUE VALUE FROM DATA AND REMOVE DUPLICAY.
+-------------------------------------------------------------------------------------------
+SYNTAX:
+	SELECT DISTINCT COLUMN_NAME FROM TABLE_NAME;
+----------------------------------------------------------------------------------------------
+
+SELECT DISTINCT * FROM TABLENAME;
+-----------------------------------------------------------------------------------------
+
+mysql> SELECT DISTINCT CITY FROM STUDENT;
++-----------+
+| CITY      |
++-----------+
+| AGRA      |
+| RAY NAGAR |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT GENDER FROM STUDENT;
++--------+
+| GENDER |
++--------+
+| MALE   |
+| FEMALE |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT NAME FROM STUDENT;
++--------------+
+| NAME         |
++--------------+
+| RAM KUMAR    |
+| SHYAM SINGH  |
+| SWATI MISHRA |
+| SWETA SINGH  |
+| RAVI YADAV   |
++--------------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>> MYSQL IS NULL & IS NOT NULL
+------------------------------------------------------------------------------------------------
+>> SELECT DATA WITH IS NULL
+------------------------------------------------------------------------------------------------------------
+SYNTAX:
+	SELECT COL1,COL2,COL3.......
+	FROM TABLE_NAME
+	WHERE COLUMN IS NULL;
+---------------------------------------------------------------------------------------------
+mysql> INSERT INTO STUDENT(ID,NAME, AGE, GENDER, CITY)
+    -> VALUES
+    -> (6,"MAYURI",48,"FEMALE","DEV BHUMI");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI       |  48 | FEMALE |      NULL | DEV BHUMI |
++----+--------------+-----+--------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDNET WHERE PHONE IS NULL;
+ERROR 1146 (42S02): Table 'demodatabase.studnet' doesn't exist
+mysql> select * from student where phone is Null;
++----+--------+-----+--------+-------+-----------+
+| ID | NAME   | AGE | GENDER | PHONE | CITY      |
++----+--------+-----+--------+-------+-----------+
+|  6 | MAYURI |  48 | FEMALE |  NULL | DEV BHUMI |
++----+--------+-----+--------+-------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT WHERE PHONE IS NOT NULL;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+>> MYSQL LIMIT & OFFSET
+---------------------------------------------------------------------------------------------------
+SELECT DATA WITH LIMIT:
+--------------------------------------------------------------------------------------------
+----------------------------------------------------------------
+SYNTAX:
+	SELECT COL1,COL2,COL3........
+	FROM TABLE_NAME
+	WHERE CONDITION
+	LIMIT NUMBER;
+-------------------------------------------------------------------------------------------
+mysql> SELECT * FROM STUDENT LIMIT 3;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT LIMIT 10;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI       |  48 | FEMALE |      NULL | DEV BHUMI |
++----+--------------+-----+--------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE CITY = "AGRA"
+    -> LIMIT 2;
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
++----+--------------+-----+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> LIMIT 2;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
++----+-------------+-----+--------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> ORDER BY DESC
+    -> LIMIT 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESC
+LIMIT 3' at line 3
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> ORDER BY NAME DESC
+    -> LIMIT 3;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------
+OFFSET:
+-----------------------------------------------------------------------
+
+SYNTAX:
+	SELECT * FROM TABLE_NAME 
+	WHERE CONDITION
+	ORDER BY COL_NAME ASC/DESC
+	LIMIT OFFSET,LIMIT;
+-------------------------------------------------------------------------------------------
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> ORDER BY NAME DESC
+    -> LIMIT 3;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> LIMIT 3,3;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI      |  48 | FEMALE |      NULL | DEV BHUMI |
++----+-------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> LIMIT 2,1;
++----+--------------+-----+--------+-----------+------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY |
++----+--------------+-----+--------+-----------+------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA |
++----+--------------+-----+--------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE AGE>10 AND AGE<=90
+    -> LIMIT 2,10;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  6 | MAYURI       |  48 | FEMALE |      NULL | DEV BHUMI |
++----+--------------+-----+--------+-----------+-----------+
+3 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------
+
+>> MYSQL COUNT, SUM, MIN, MAX, AVG
+--------------------------------------------------------------------------------------------------
+SELECT DATA WITH AGGRIGATE FUNCTION
+-------------------------------------------------------------------------------------------
+>> CREATE TABLE EMPLOYEE
+-------------------------------------------------------------------
+mysql> CREATE TABLE EMPLOYEE(
+    -> ID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    -> NAME CHAR(50) NOT NULL,
+    -> AGE INT NOT NULL,
+    -> GENDER CHAR(20),
+    -> SALARY INT NOT NULL);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| employee               |
+| student                |
++------------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE EMPLOYEE;
++--------+----------+------+-----+---------+----------------+
+| Field  | Type     | Null | Key | Default | Extra          |
++--------+----------+------+-----+---------+----------------+
+| ID     | int      | NO   | PRI | NULL    | auto_increment |
+| NAME   | char(50) | NO   |     | NULL    |                |
+| AGE    | int      | NO   |     | NULL    |                |
+| GENDER | char(20) | YES  |     | NULL    |                |
+| SALARY | int      | NO   |     | NULL    |                |
++--------+----------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE(NAME,AGE,GENDER,SALARY)
+    -> VALUES
+    -> ("RAM KUMAR",65,"MALE",75000),
+    -> ("SHYAM SINGH",78,"MALE",63000),
+    -> ("DOLLY YADAV",45,"FEMALE",50000),
+    -> ("JOLLY DAS",26,"FEMALE",55000),
+    -> ("ANIL KAPOOR",79,"MALE",20000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  65 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   |  20000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
 
