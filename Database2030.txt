@@ -1553,6 +1553,426 @@ mysql> SELECT * FROM EMPLOYEE;
 
 ---------------------------------------------------------------------------------------------------------
 
+>> COUNT(column): Counts the total number of records.
+>> MAX(column): Return maximum value.
+>> MIN(column): RETURN MINIMUM VALUE.
+>> SUM(COLUMN): RETURN SUM OF THE VALUE.
+>> AVG(COLUMN): RETURN AVERAGE OF THE VALUE.
+---------------------------------------------------------------------------------------------
+SYNTAX:
+
+	>> SELECT COUNT(COLUMN)
+	>> FROM TABLE_NAME
+	>> WHERE CONDITION;
+----------------------------------------------------------------------------------------------
+	>> SELECT SUM(COLUMN_NAME)
+	>> FROM TABLE_NAME
+	>> WHERE CONDITION;
+---------------------------------------------------------------------------------------------------
+
+mysql> select * from employee;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  65 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   |  20000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(NAME) FROM EMPLOYEE;
++-------------+
+| COUNT(NAME) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT COUNT(DISTINCT GENDER) FROM EMPLYEE;
+ERROR 1146 (42S02): Table 'demodatabase.emplyee' doesn't exist
+mysql> SELECT COUNT(DISTINCT GENDER) FROM EMPLOYEE;
++------------------------+
+| COUNT(DISTINCT GENDER) |
++------------------------+
+|                      2 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) FROM EMPLOYEE;
++-------------+
+| MAX(SALARY) |
++-------------+
+|       75000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(SALARY) AS MINIMUM_SALARY FROM EMPLYEE;
+ERROR 1146 (42S02): Table 'demodatabase.emplyee' doesn't exist
+mysql> SELECT MIN(SALARY) AS MINIMUM_SALARY FROM EMPLOYEE;
++----------------+
+| MINIMUM_SALARY |
++----------------+
+|          20000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(SALARY) AS TOTAL_AMOUNT FROM EMPLOYEE;
++--------------+
+| TOTAL_AMOUNT |
++--------------+
+|       263000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(SALARY) AS AVERAGE_SALARY FROM EMPLOYEE;
++----------------+
+| AVERAGE_SALARY |
++----------------+
+|     52600.0000 |
++----------------+
+1 row in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------
+
+>> MYSQL UPDATE
+-------------------------------------------------------------------------------------------
+>> HOW TO UPDATE VALUE IN TABLE.
+--------------------------------------------------------------------------------------------
+SYNTAX:- TO UPDATE SINGLE VALUE
+----------------------------------------
+>> UPDATE TABLE_NAME
+>> SET COLUMN_NAME1 = VALUE1, COLUMN_NAME2 = VALUE2......
+>> WHERE CONDITION;
+---------------------------------------------------------------------------------------------------
+
+SYNTAX: TO UPDATE MULTIPLE VALUE
+----------------------------------------
+>> UPDATE TABLE_NAME
+>> SET COLUMN_NAME1 = VALUE1,
+	COLUMN_NAME2 = VALUE2;
+-------------------------------------------------------------------------------------------------
+
+mysql> UPDATE EMPLOYEE
+    -> SET AGE = 50
+    -> WHERE ID = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMPLYEE;
+ERROR 1146 (42S02): Table 'demodatabase.emplyee' doesn't exist
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  50 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   |  20000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE
+    -> SET SALARY = 100000
+    -> WHERE ID = 5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  50 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   | 100000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE
+    -> SET GENDER = "FEMALE"
+    -> WHERE ID IN (1,2);
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  50 | FEMALE |  75000 |
+|  2 | SHYAM SINGH |  78 | FEMALE |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   | 100000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE
+    -> SET GENDER = "MALE"
+    -> WHERE ID IN(1,2,3,4);
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  50 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | MALE   |  50000 |
+|  4 | JOLLY DAS   |  26 | MALE   |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   | 100000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE
+    -> SET GENDER  = "FEMALE"
+    -> WHERE ID IN(3,4);
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----+-------------+-----+--------+--------+
+| ID | NAME        | AGE | GENDER | SALARY |
++----+-------------+-----+--------+--------+
+|  1 | RAM KUMAR   |  50 | MALE   |  75000 |
+|  2 | SHYAM SINGH |  78 | MALE   |  63000 |
+|  3 | DOLLY YADAV |  45 | FEMALE |  50000 |
+|  4 | JOLLY DAS   |  26 | FEMALE |  55000 |
+|  5 | ANIL KAPOOR |  79 | MALE   | 100000 |
++----+-------------+-----+--------+--------+
+5 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------
+
+>> MYSQL DELETE QUERY
+---------------------------------------------------------------------------------------------
+
+>> HOW TO DELETE DATA FROM TABLES
+---------------------------------------------------------------------------------------------
+
+SYNTAX: [FOR SELETED DATA]
+	>> DELETE FROM TABLE_NAME
+	>> WHERE CONDITION;
+
+SYNTAX: [FOR WHOLE DATA DELETE]
+	>> DELETED FROM TABLE_NAME;
+-----------------------------------------
+
+-----------------------------------------------------------------------------------------------
+
+NOTE: DON'T USE DELETE COMMAND WITHOUT USING WHERE CLAUSE.
+	IF YOU ARE USING WITHOUT WHERE CALUSE YOUR WHOLE DATA WILL BE DELETED.
+-----------------------------------------------------------------------------------------------
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| employee               |
+| student                |
++------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+--------------+-----+--------+-----------+-----------+
+| ID | NAME         | AGE | GENDER | PHONE     | CITY      |
++----+--------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR    |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH  |  22 | MALE   |  12345672 | RAY NAGAR |
+|  3 | SWATI MISHRA |  35 | FEMALE | 123456720 | AGRA      |
+|  4 | SWETA SINGH  |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV   |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI       |  48 | FEMALE |      NULL | DEV BHUMI |
++----+--------------+-----+--------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUDENT WHERE ID = 3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI      |  48 | FEMALE |      NULL | DEV BHUMI |
++----+-------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SHOW TABLE STATUS LIKE 'STUDENT';
++---------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+| Name    | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time         | Check_time | Collation          | Checksum | Create_options | Comment |
++---------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+| student | InnoDB |      10 | Dynamic    |    5 |           3276 |       16384 |               0 |        16384 |         0 |           NULL | 2026-01-08 11:39:03 | 2026-01-21 11:36:30 | NULL       | utf8mb4_0900_ai_ci |     NULL |                |         |
++---------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+1 row in set (0.01 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM STUDENT WHERE ID = 4;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET AUTOCOMMIT = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@AUTOCOMMIT;
++--------------+
+| @@AUTOCOMMIT |
++--------------+
+|            0 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM STUDENT WHERE ID = 2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET AUTOCOMMIT = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@AUTOCOMMIT;
++--------------+
+| @@AUTOCOMMIT |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * STUDENT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STUDENT' at line 1
+mysql> SELECT * FROM STUDENT;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI      |  48 | FEMALE |      NULL | DEV BHUMI |
++----+-------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SET AUTOCOMMIT = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM STUDENT WHERE ID=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI      |  48 | FEMALE |      NULL | DEV BHUMI |
++----+-------------+-----+--------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+-------------+-----+--------+-----------+-----------+
+| ID | NAME        | AGE | GENDER | PHONE     | CITY      |
++----+-------------+-----+--------+-----------+-----------+
+|  1 | RAM KUMAR   |  18 | MALE   | 123456789 | AGRA      |
+|  2 | SHYAM SINGH |  22 | MALE   |  12345672 | RAY NAGAR |
+|  4 | SWETA SINGH |  88 | FEMALE |  12365478 | AGRA      |
+|  5 | RAVI YADAV  |  98 | MALE   | 912365478 | AGRA      |
+|  6 | MAYURI      |  48 | FEMALE |      NULL | DEV BHUMI |
++----+-------------+-----+--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+MYSQL PRIMARY AND FOREIGN KEY
+------------------------------------------------------------------------------------
+1). NOT NULL
+2). UNIQUE
+3). DEFAULT
+4). CHECK
+5). PRIMARY KEY
+6). FOREIGN KEY
+----------------------------------------------------------------------------------------------
+Q). WHAT IS PRIMARY KEY?
+--------------------------------------------
+>> PRIMARY KEY ALWAYS HAS UNIQUE DATA.
+>> SAME AS UNIQU BUT PRIMARY KEY NOT STORED NULL VALUE.
+>> UNIQUE HAS APPLIED MULTIPLE COLUMN BUT PRIMAY KEY IS ONLY ONE KEY IN YOUR DATASET.
+>> A PRIMARY KEY ALWAYS HAS UNIQUE DATA.
+>> A TABLE CAN CONTAINS ONLY ONE PRIMARY KEY CONSTRAINTS.
+------------------------------------------------------------------------------------------------
+SYNTAX: [TO CREATE TABLE WITH PRIMARY KEY]
+-----------------------------------------------
+>>CREATE TABLE(
+	ID INT PRIMARY KEY AUTO_INCREMENT,
+	COLNAME DATA_TYPE CONSTRAINT,
+	COLNAME DATA_TYPE CONSTRAINT,
+	COLNAME DATA_TUPE CONSTRAINT ...........
+	);
+-------------------------------------------------------------------------------------------
+mysql> CREATE TABLE STU_PRI(
+    -> ID INT PRIMARY KEY AUTO_INCREMENT,
+    -> NAME CHAR(100) NOT NULL,
+    -> AGE INT,
+    -> CITY CHAR(100) DEFAULT "NOIDA"
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DESCRIBE STU_PRI;
++-------+-----------+------+-----+---------+----------------+
+| Field | Type      | Null | Key | Default | Extra          |
++-------+-----------+------+-----+---------+----------------+
+| ID    | int       | NO   | PRI | NULL    | auto_increment |
+| NAME  | char(100) | NO   |     | NULL    |                |
+| AGE   | int       | YES  |     | NULL    |                |
+| CITY  | char(100) | YES  |     | NOIDA   |                |
++-------+-----------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------
+>> YOU CAN SET PRIMARY KEY ONLY IN ID, BECAUSE ALL DATA CAN BE DUPLICATED.
+-------------------------------------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE STU_PRI(
+    -> ID INT AUTO_INCREMENT,
+    -> NAME CHAR(100) NOT NULL,
+    -> AGE INT,
+    -> CITY CHAR(50) DEFAULT "NOIDA",
+    -> PRIMARY KEY(ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE STU_PRI;
++-------+-----------+------+-----+---------+----------------+
+| Field | Type      | Null | Key | Default | Extra          |
++-------+-----------+------+-----+---------+----------------+
+| ID    | int       | NO   | PRI | NULL    | auto_increment |
+| NAME  | char(100) | NO   |     | NULL    |                |
+| AGE   | int       | YES  |     | NULL    |                |
+| CITY  | char(50)  | YES  |     | NOIDA   |                |
++-------+-----------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
