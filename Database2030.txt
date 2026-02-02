@@ -1969,6 +1969,721 @@ mysql> DESCRIBE STU_PRI;
 +-------+-----------+------+-----+---------+----------------+
 4 rows in set (0.00 sec)
 -------------------------------------------------------------------------------------------------------------
+FOREIGN KEY??
+-----------------------------------------------------------------------
+>> A FOREIGN KEY IS A KEY USED TO LINK TWO TABLES TOGETHER.
+>> A FOREIGN KEY IN ONE TABLE USED TO PRINT PRIMARY KEY IN ANOTHER TABLE.
+----------------------------------------------------------------------------------------------
+SYNTAX FOR CREATE TABLE OF FOREIGN KEY:
+--------------------------------------------------------------------
+CREATE TABLE TABLE_NAME(
+	ID INT NOT NULL AUTO_INCRMENET,
+	NAME CHAR(50) NOT NULL,
+	AGE INT NOT NULL,
+	CITY INT,
+	PRIMARY KEY(ID),
+	FOREIGN KEY(COLUMN_NAME) REFERENCES TABLE_NAME(COLUMN_ID)
+	);
+-------------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE CITY(
+    -> ID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    -> CITYNAME CHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| city                   |
+| employee               |
+| stu_pri                |
++------------------------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE CITY;
++----------+----------+------+-----+---------+----------------+
+| Field    | Type     | Null | Key | Default | Extra          |
++----------+----------+------+-----+---------+----------------+
+| ID       | int      | NO   | PRI | NULL    | auto_increment |
+| CITYNAME | char(50) | NO   |     | NULL    |                |
++----------+----------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO CITY(CITYNAME)
+    -> VALUES
+    -> ("PUNE"),
+    -> ("NOIDA"),
+    -> ("GURUGRAM"),
+    -> ("BARANASHI"),
+    -> ("VASANT VIHAR"),
+    -> ("DWARKA"),
+    -> ("BANER");
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CITY;
++----+--------------+
+| ID | CITYNAME     |
++----+--------------+
+|  1 | PUNE         |
+|  2 | NOIDA        |
+|  3 | GURUGRAM     |
+|  4 | BARANASHI    |
+|  5 | VASANT VIHAR |
+|  6 | DWARKA       |
+|  7 | BANER        |
++----+--------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE STUDENT(
+    -> ID INT PRIMARY KEY AUTO_INCREMENT,
+    -> NAME CHAR(50) NOT NULL,
+    -> AGE INT,
+    -> CITY INT,
+    -> FOREIGN KEY(CITY) REFERENCES CITY(ID)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| city                   |
+| employee               |
+| stu_pri                |
+| student                |
++------------------------+
+4 rows in set (0.00 sec)
+
+mysql> DESCRIBE STUDENT;
++-------+----------+------+-----+---------+----------------+
+| Field | Type     | Null | Key | Default | Extra          |
++-------+----------+------+-----+---------+----------------+
+| ID    | int      | NO   | PRI | NULL    | auto_increment |
+| NAME  | char(50) | NO   |     | NULL    |                |
+| AGE   | int      | YES  |     | NULL    |                |
+| CITY  | int      | YES  | MUL | NULL    |                |
++-------+----------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO STUDENT(NAME,AGE,CITY)
+    -> VALUES
+    -> ("RAM KUMAR",88,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++----+-----------+------+------+
+| ID | NAME      | AGE  | CITY |
++----+-----------+------+------+
+|  1 | RAM KUMAR |   88 |    2 |
++----+-----------+------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO STUDENT(NAME,AGE,CITY)
+    -> VALUES
+    -> ("BINOD SINGH",78,5),
+    -> ("ABHISHEK SHARMA",40,5),
+    -> ("SURYA KUMAR YADAV",56,3),
+    -> ("SANJU SAMSON",55,4),
+    -> ("HARDIK PANDYA",76,2),
+    -> ("AXAR PATEL",45,3);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM STUDENT;
++----+-------------------+------+------+
+| ID | NAME              | AGE  | CITY |
++----+-------------------+------+------+
+|  1 | RAM KUMAR         |   88 |    2 |
+|  2 | BINOD SINGH       |   78 |    5 |
+|  3 | ABHISHEK SHARMA   |   40 |    5 |
+|  4 | SURYA KUMAR YADAV |   56 |    3 |
+|  5 | SANJU SAMSON      |   55 |    4 |
+|  6 | HARDIK PANDYA     |   76 |    2 |
+|  7 | AXAR PATEL        |   45 |    3 |
++----+-------------------+------+------+
+7 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------
+
+>> MYSQL JOIN
+-------------------------------------------------------
+1). INNER JOIN
+2). LEFT JOIN
+3). RIGHT JOIN
+4). CROSS JOIN
+----------------------------------------------------------------------------------------------
+
+
+1). INNER JOIN
+-------------------------
+>> SELECT COLUMNS
+>> FROM TABLE_NAME1
+>> INNTER JOIN TABLE_NAME_2
+>> ON TABLE1.COLUMN_NAME[FOREIGN KEY] = TABLE_NAME2.COLUMN_NAME[PRIMARY KEY]
+------------------------------------------------------------------------------------------
+mysql> SELECT * FROM STUDENT
+    -> INNER JOIN CITY
+    -> ON STUDENT.CITY = CITY.ID;
++----+-------------------+------+------+----+--------------+
+| ID | NAME              | AGE  | CITY | ID | CITYNAME     |
++----+-------------------+------+------+----+--------------+
+|  1 | RAM KUMAR         |   88 |    2 |  2 | NOIDA        |
+|  2 | BINOD SINGH       |   78 |    5 |  5 | VASANT VIHAR |
+|  3 | ABHISHEK SHARMA   |   40 |    5 |  5 | VASANT VIHAR |
+|  4 | SURYA KUMAR YADAV |   56 |    3 |  3 | GURUGRAM     |
+|  5 | SANJU SAMSON      |   55 |    4 |  4 | BARANASHI    |
+|  6 | HARDIK PANDYA     |   76 |    2 |  2 | NOIDA        |
+|  7 | AXAR PATEL        |   45 |    3 |  3 | GURUGRAM     |
++----+-------------------+------+------+----+--------------+
+7 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------
+mysql> SELECT STUDENT.ID, STUDENT.NAME,STUDENT.AGE,STUDENT.CITY,CITY.CITYNAME FROM STUDENT
+    -> INNER JOIN CITY
+    -> ON STUDENT.CITY = CITY.ID;
++----+-------------------+------+------+--------------+
+| ID | NAME              | AGE  | CITY | CITYNAME     |
++----+-------------------+------+------+--------------+
+|  1 | RAM KUMAR         |   88 |    2 | NOIDA        |
+|  2 | BINOD SINGH       |   78 |    5 | VASANT VIHAR |
+|  3 | ABHISHEK SHARMA   |   40 |    5 | VASANT VIHAR |
+|  4 | SURYA KUMAR YADAV |   56 |    3 | GURUGRAM     |
+|  5 | SANJU SAMSON      |   55 |    4 | BARANASHI    |
+|  6 | HARDIK PANDYA     |   76 |    2 | NOIDA        |
+|  7 | AXAR PATEL        |   45 |    3 | GURUGRAM     |
++----+-------------------+------+------+--------------+
+7 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------
+
+1.Solved
+---------------
+mysql> use practiceforeignkey;
+Database changed
+mysql> create table R1(
+    -> Stud_id int primary key,
+    -> Name char(50) not null,
+    -> Course char(50) not null
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> describe R1;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| Stud_id | int      | NO   | PRI | NULL    |       |
+| Name    | char(50) | NO   |     | NULL    |       |
+| Course  | char(50) | NO   |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into R1(Stud_id, Name,Course)
+    -> values
+    -> (101,"John","Computer"),
+    -> (105,"Merry","AI"),
+    -> (107,"Sheero","Biology"),
+    -> (108,"Bisle","Maths");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from R1;
++---------+--------+----------+
+| Stud_id | Name   | Course   |
++---------+--------+----------+
+|     101 | John   | Computer |
+|     105 | Merry  | AI       |
+|     107 | Sheero | Biology  |
+|     108 | Bisle  | Maths    |
++---------+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create table R2(
+    -> Dept_name char(100) not null,
+    -> Stud_Id int not null,
+    -> Foreign key(Stud_ID) References R1(Stud_Id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> describe R2;
++-----------+-----------+------+-----+---------+-------+
+| Field     | Type      | Null | Key | Default | Extra |
++-----------+-----------+------+-----+---------+-------+
+| Dept_name | char(100) | NO   |     | NULL    |       |
+| Stud_Id   | int       | NO   | MUL | NULL    |       |
++-----------+-----------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into R2(Dept_id, Stud_id)
+    -> values
+    -> ("CS_Department",105),
+    -> ("CS_Department",101),
+    -> ("Science_Department",101),
+    -> ("Maths_Department",108);
+ERROR 1054 (42S22): Unknown column 'Dept_id' in 'field list'
+mysql> insert into R2(Dept_name, Stud_id)
+    -> values
+    -> ("CS_Department",105),
+    -> ("CS_Department",101),
+    -> ("Science_Department",101),
+    -> ("Maths_Department",108);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from R2;
++--------------------+---------+
+| Dept_name          | Stud_Id |
++--------------------+---------+
+| CS_Department      |     105 |
+| CS_Department      |     101 |
+| Science_Department |     101 |
+| Maths_Department   |     108 |
++--------------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select R1.Stud_id,R1.Name,R1.Course,R2.Dept_name from R1
+    -> Inner Join R2
+    -> ON R1.Stud_id = R2.Stud_Id;
++---------+-------+----------+--------------------+
+| Stud_id | Name  | Course   | Dept_name          |
++---------+-------+----------+--------------------+
+|     101 | John  | Computer | CS_Department      |
+|     101 | John  | Computer | Science_Department |
+|     105 | Merry | AI       | CS_Department      |
+|     108 | Bisle | Maths    | Maths_Department   |
++---------+-------+----------+--------------------+
+4 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------
+
+>> MySQL Join
+---------------------------------------------------------------
+1). INNER JOIN
+2). LEFT JOIN
+3). RIGHT JOIN
+4). CROSS JOIN
+------------------------------------------------------------------------------------------
+1). WHAT IS INNER JON??
+---------------------------------------------------------------------------------------------
+THE INNER JOIN SELECT RECORDS THAT HAVE MATHING VALUE IN BOTH.
+---------------------------------------------------------------------------------
+SYNTAX:
+------------------
+	>> SELECT COLUMNS
+	>> FROM TABLE1
+	>> INNER JOIN TABLE2	
+	>> ON TABLE1.COLUMN_NAME = TBALE2.COLUMN_NAME;
+---------------------------------------------------------------------------------------------
+
+
+mysql> select r1.stud_id, r1.Name, r1.course, r2.dept_name from r1
+    -> inner join r2
+    -> on r1.stud_id = r2.stud_id;
++---------+-------+----------+--------------------+
+| stud_id | Name  | course   | dept_name          |
++---------+-------+----------+--------------------+
+|     105 | Merry | AI       | CS_Department      |
+|     101 | John  | Computer | CS_Department      |
+|     101 | John  | Computer | Science_Department |
+|     108 | Bisle | Maths    | Maths_Department   |
++---------+-------+----------+--------------------+
+4 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------
+
+mysql> select * from r1 inner join r2 on r1.stud_id = r2.stud_id;
++---------+-------+----------+--------------------+---------+
+| Stud_id | Name  | Course   | Dept_name          | Stud_Id |
++---------+-------+----------+--------------------+---------+
+|     105 | Merry | AI       | CS_Department      |     105 |
+|     101 | John  | Computer | CS_Department      |     101 |
+|     101 | John  | Computer | Science_Department |     101 |
+|     108 | Bisle | Maths    | Maths_Department   |     108 |
++---------+-------+----------+--------------------+---------+
+4 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------
+
+>> LEFT JOIN AND RIGHT JOIN
+---------------------------------------------------------------------------------------------
+>> THE LEFT JOIN RETURNS ALL RECORDS FROM THE LEFT TABLE(TABLE 1), AND THE MATCHED RECORDS FROM THE RIGHT TABLE(2)
+---------------------------------------------------------------------------------------------
+select columns
+from table 1
+left join table 2
+on table1.column_name = table 2. column_name;
+
+-------------------------------------------------------------------------------------------------------------
+mysql> select * from r1
+    -> left join r2
+    -> on r1.stud_id = r2.stud_id;
++---------+--------+----------+--------------------+---------+
+| Stud_id | Name   | Course   | Dept_name          | Stud_Id |
++---------+--------+----------+--------------------+---------+
+|     101 | John   | Computer | Science_Department |     101 |
+|     101 | John   | Computer | CS_Department      |     101 |
+|     105 | Merry  | AI       | CS_Department      |     105 |
+|     107 | Sheero | Biology  | NULL               |    NULL |
+|     108 | Bisle  | Maths    | Maths_Department   |     108 |
+|     110 | Hero   | Botany   | NULL               |    NULL |
++---------+--------+----------+--------------------+---------+
+6 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------
+>> 
+------------------------------------------------------------------------------------------------
+>> THE RIGHT JOINS RETURN ALL RECORDS FROM THE RIGHT TABLE (TABLE2) AND THE MATCHED RECORDS FROM THE LEFT TABLE(TABLE_1)
+
+-------------------------------------------------------------------------------------------------
+SYNTAX:
+------------------------
+>> SELECT COLUMNS
+>> FROM TABLE1
+>> RIGHT JOIN TABLE2
+>> ON TABLE1.COLUMN_NAME = TABLE2.COLUMN_NAME;
+------------------------------------------------------------------------------------------
+
+use near 'R2' at line 1
+mysql> SELECT * FROM R2;
++--------------------+---------+
+| Dept_name          | Stud_Id |
++--------------------+---------+
+| CS_Department      |     105 |
+| CS_Department      |     101 |
+| Science_Department |     101 |
+| Maths_Department   |     108 |
++--------------------+---------+
+4 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------
+
+4. CORSS JOIN
+
+-----------------------------
+SELECT COLUMNS
+FROM TABLE1
+CROSS JOIN TABLE 2;
+-----------------------------------------------------------------------------------------------------
+mysql> SELECT * FROM R1
+    -> CORSS JOIN R2;
++---------+--------+----------+--------------------+---------+
+| Stud_id | Name   | Course   | Dept_name          | Stud_Id |
++---------+--------+----------+--------------------+---------+
+|     101 | John   | Computer | Maths_Department   |     108 |
+|     101 | John   | Computer | Science_Department |     101 |
+|     101 | John   | Computer | CS_Department      |     101 |
+|     101 | John   | Computer | CS_Department      |     105 |
+|     105 | Merry  | AI       | Maths_Department   |     108 |
+|     105 | Merry  | AI       | Science_Department |     101 |
+|     105 | Merry  | AI       | CS_Department      |     101 |
+|     105 | Merry  | AI       | CS_Department      |     105 |
+|     107 | Sheero | Biology  | Maths_Department   |     108 |
+|     107 | Sheero | Biology  | Science_Department |     101 |
+|     107 | Sheero | Biology  | CS_Department      |     101 |
+|     107 | Sheero | Biology  | CS_Department      |     105 |
+|     108 | Bisle  | Maths    | Maths_Department   |     108 |
+|     108 | Bisle  | Maths    | Science_Department |     101 |
+|     108 | Bisle  | Maths    | CS_Department      |     101 |
+|     108 | Bisle  | Maths    | CS_Department      |     105 |
+|     110 | Hero   | Botany   | Maths_Department   |     108 |
+|     110 | Hero   | Botany   | Science_Department |     101 |
+|     110 | Hero   | Botany   | CS_Department      |     101 |
+|     110 | Hero   | Botany   | CS_Department      |     105 |
++---------+--------+----------+--------------------+---------+
+20 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+>> GROUP BY AND HAVING CLAUSE
+--------------------------------------------------------------------------------------------------
+>> GROUP BY: THE GROUP BY CLAUSE IS USED IN CONJUNCATION WITH SELECT STATMENT AND AGGREGATE FUNCTION TO GROUP BY TOGETHER BY COMMON VALUE.
+
+-----------------------------------------------------------------------------------------------
+AGGRAGATE FUNCTION - COUNT(), MIN(), MAX()
+----------------------------------------------------------------------------------------------
+SYNTAX:
+----------------------
+SELECT COLUMNS FROM TABLE_NAME 
+WHERE CONDITION 
+GROUP BY COLUMN_NAME;
+--------------------------------------------------------------------------------------------------------------
+
+mysql> SELECT R1.Course, COUNT(R2.Dept_name) AS total_departments
+    -> FROM R1
+    -> INNER JOIN R2
+    -> ON R1.Stud_id = R2.Stud_id
+    -> GROUP BY R1.Course;
++----------+-------------------+
+| Course   | total_departments |
++----------+-------------------+
+| AI       |                 1 |
+| Computer |                 2 |
+| Maths    |                 1 |
++----------+-------------------+
+3 rows in set (0.00 sec)
+
+
+
+--------------------------------------------------------------------------------------------------
+
+>> Subquery with exists and Not Exists
+-----------------------------------------------------------------------------------------------------
+>> What is Subquery or Nested Query
+---------------------------------------------------------------------------------------------
+
+Select with subquery Syntax
+--------------------------------------------------------------------------------------------
+>> SELECT COLUMNS
+>> FROM TABLE1
+>> WHERE COLUMN=(SELECT COLUMNS FROM TABLE2 WHERE CONDITION);
+-----------------------------------------------------------------------------------------------
+
+mysql> SELECT NAME FROM STUDENT
+    -> WHERE CITY=(SELECT ID FROM CITY WHERE CITYNAME="NOIDA");
++---------------+
+| NAME          |
++---------------+
+| RAM KUMAR     |
+| HARDIK PANDYA |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE CITY = (SELECT ID FROM CITY WHERE CITYNAME = "NOIDA");
++----+---------------+------+------+
+| ID | NAME          | AGE  | CITY |
++----+---------------+------+------+
+|  1 | RAM KUMAR     |   88 |    2 |
+|  6 | HARDIK PANDYA |   76 |    2 |
++----+---------------+------+------+
+2 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------
+
+EXISTS AND NOT EXISTS
+----------------------------------------------------
+SYNTAX:
+----------------------------------------------
+SELECT COLUMNS FROM TABLE 1
+WHERE EXISTS(SELECT COLUMN FROM TABLE2 WHERE CONDTION);
+-------------------------------------------------------------------------------------------------
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE EXISTS(SELECT ID FROM CITY WHERE CITYNAME = "PUNE");
++----+-------------------+------+------+
+| ID | NAME              | AGE  | CITY |
++----+-------------------+------+------+
+|  1 | RAM KUMAR         |   88 |    2 |
+|  2 | BINOD SINGH       |   78 |    5 |
+|  3 | ABHISHEK SHARMA   |   40 |    5 |
+|  4 | SURYA KUMAR YADAV |   56 |    3 |
+|  5 | SANJU SAMSON      |   55 |    4 |
+|  6 | HARDIK PANDYA     |   76 |    2 |
+|  7 | AXAR PATEL        |   45 |    3 |
++----+-------------------+------+------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE EXISTS(SELECT ID FROM CITY WHERE CITYNAME = "PUNE");
++----+-------------------+------+------+
+| ID | NAME              | AGE  | CITY |
++----+-------------------+------+------+
+|  1 | RAM KUMAR         |   88 |    2 |
+|  2 | BINOD SINGH       |   78 |    5 |
+|  3 | ABHISHEK SHARMA   |   40 |    5 |
+|  4 | SURYA KUMAR YADAV |   56 |    3 |
+|  5 | SANJU SAMSON      |   55 |    4 |
+|  6 | HARDIK PANDYA     |   76 |    2 |
+|  7 | AXAR PATEL        |   45 |    3 |
++----+-------------------+------+------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> SELECT * FROM STUDENT
+    -> WHERE NOT EXISTS(SELECT ID FROM CITY WHERE CITYNAME = "UP");
++----+-------------------+------+------+
+| ID | NAME              | AGE  | CITY |
++----+-------------------+------+------+
+|  1 | RAM KUMAR         |   88 |    2 |
+|  2 | BINOD SINGH       |   78 |    5 |
+|  3 | ABHISHEK SHARMA   |   40 |    5 |
+|  4 | SURYA KUMAR YADAV |   56 |    3 |
+|  5 | SANJU SAMSON      |   55 |    4 |
+|  6 | HARDIK PANDYA     |   76 |    2 |
+|  7 | AXAR PATEL        |   45 |    3 |
++----+-------------------+------+------+
+7 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+>> UNION & UNION ALL
+----------------------------------------------------------------------------------------------------
+
+>> WHAT IS UNION & UNION ALL
+
+------------------------------------------------------------------------------------------------
+SYNTAX:
+SELECT COLUMN_NAME FROM TABLE1
+UNION/ UNION ALL
+SELECT * FROM TABLE2;
+--------------------------------------------------------------------------------------------------------------------
+
+
+RULE:
+-----
+>> EACH SELECT STATMENT WITHIN UNION MUST HAVE THE SAME NUMBER OF COLUMNS.
+>> THE COLUMNS MUST ALSO HAVE SIMILAR DATA TYPE.
+>> THE COLUMN IN EACH SELECT STATMENT MUST ALSO BE IN THE SAME ORDER.
+--------------------------------------------------------------------------------------------------
+
+
+mysql> SELECT ID FROM STUDENT
+    -> UNION
+    -> SELECT ID FROM CITY;
++----+
+| ID |
++----+
+|  1 |
+|  6 |
+|  4 |
+|  7 |
+|  5 |
+|  2 |
+|  3 |
++----+
+7 rows in set (0.00 sec)
+
+mysql> SELECT CITY FROM STUDENT
+    -> UNION
+    -> SELECT ID FROM CITY;
++------+
+| CITY |
++------+
+|    2 |
+|    3 |
+|    4 |
+|    5 |
+|    1 |
+|    6 |
+|    7 |
++------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT CITY FROM STUDENT
+    -> UNION ALL
+    -> SELECT ID FROM CITY;
++------+
+| CITY |
++------+
+|    2 |
+|    2 |
+|    3 |
+|    3 |
+|    4 |
+|    5 |
+|    5 |
+|    1 |
+|    2 |
+|    3 |
+|    4 |
+|    5 |
+|    6 |
+|    7 |
++------+
+14 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------
+
+>> IF & CASE CLAUSE
+-------------------------------------------------------------------------------------------
+
+SYNTAX:
+------------------
+>> SELECT COLUMNS 
+>> IF (CONDITION, TRUE RESULT, FALSE RESULT) ALIAS_NAME
+>> FROM TABLE_NAME;
+---------------------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE STUDENT_DATA (
+    ->     ID INT PRIMARY KEY AUTO_INCREMENT,
+    ->     NAME CHAR(100) NOT NULL,
+    ->     PERCENTAGE INT,
+    ->     AGE INT NOT NULL,
+    ->     GENDER CHAR(1),
+    ->     CITY INT,
+    ->     FOREIGN KEY (CITY) REFERENCES CITY(ID)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_demodatabase |
++------------------------+
+| city                   |
+| employee               |
+| stu_pri                |
+| student                |
+| student_data           |
++------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE STUDENT_DATA;
++------------+-----------+------+-----+---------+----------------+
+| Field      | Type      | Null | Key | Default | Extra          |
++------------+-----------+------+-----+---------+----------------+
+| ID         | int       | NO   | PRI | NULL    | auto_increment |
+| NAME       | char(100) | NO   |     | NULL    |                |
+| PERCENTAGE | int       | YES  |     | NULL    |                |
+| AGE        | int       | NO   |     | NULL    |                |
+| GENDER     | char(1)   | YES  |     | NULL    |                |
+| CITY       | int       | YES  | MUL | NULL    |                |
++------------+-----------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO STUDENT_DATA(NAME, PERCENTAGE, AGE, GENDER, CITY)
+    -> VALUES
+    -> ("RAM KUMAR", 45, 19, "M",1),
+    -> ("SARITA KUMARI",85, 22, "F",2),
+    -> ("SALMAN KHAN",29, 20, "M", 1),
+    -> ("ANIL KAPOOR",47,18,"M",3),
+    -> ("JUHI CHAWLA",74,22,"F",1),
+    -> ("RUHI SINGH",88,24,"F",4),
+    -> ("JOHN ABHARAM",64,21,"M",5),
+    -> ("SAHID KAPOOR",99,20,"M",6);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM STUDENT_DATA;
++----+---------------+------------+-----+--------+------+
+| ID | NAME          | PERCENTAGE | AGE | GENDER | CITY |
++----+---------------+------------+-----+--------+------+
+|  1 | RAM KUMAR     |         45 |  19 | M      |    1 |
+|  2 | SARITA KUMARI |         85 |  22 | F      |    2 |
+|  3 | SALMAN KHAN   |         29 |  20 | M      |    1 |
+|  4 | ANIL KAPOOR   |         47 |  18 | M      |    3 |
+|  5 | JUHI CHAWLA   |         74 |  22 | F      |    1 |
+|  6 | RUHI SINGH    |         88 |  24 | F      |    4 |
+|  7 | JOHN ABHARAM  |         64 |  21 | M      |    5 |
+|  8 | SAHID KAPOOR  |         99 |  20 | M      |    6 |
++----+---------------+------------+-----+--------+------+
+8 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------------
+
+
+mysql> SELECT * ,
+    -> IF (PERCENTAGE>40,"PASS","FAIL") AS RESULT
+    -> FROM STUDENT_DATA;
++----+---------------+------------+-----+--------+------+--------+
+| ID | NAME          | PERCENTAGE | AGE | GENDER | CITY | RESULT |
++----+---------------+------------+-----+--------+------+--------+
+|  1 | RAM KUMAR     |         45 |  19 | M      |    1 | PASS   |
+|  2 | SARITA KUMARI |         85 |  22 | F      |    2 | PASS   |
+|  3 | SALMAN KHAN   |         29 |  20 | M      |    1 | FAIL   |
+|  4 | ANIL KAPOOR   |         47 |  18 | M      |    3 | PASS   |
+|  5 | JUHI CHAWLA   |         74 |  22 | F      |    1 | PASS   |
+|  6 | RUHI SINGH    |         88 |  24 | F      |    4 | PASS   |
+|  7 | JOHN ABHARAM  |         64 |  21 | M      |    5 | PASS   |
+|  8 | SAHID KAPOOR  |         99 |  20 | M      |    6 | PASS   |
++----+---------------+------------+-----+--------+------+--------+
+8 rows in set (0.00 sec)
+
 
 
 
